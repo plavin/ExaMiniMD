@@ -18,10 +18,11 @@ comm_serial.h and comm_mpi.h.
 In the future the plan is to provide focused miniApps with a subset of the 
 available functionality for specific research purposes. 
 
-This implementation uses the Kokkos programming model, which you can clone
+This implementation uses the Kokkos programming model and Kokkos kernels, which you can clone
 from github via:
 ```
 git clone https://github.com/kokkos/kokkos ~/kokkos
+git clone https://github.com/kokkos/kokkos-kernels ~/kokkos-kernels
 ```
 
 # Current Capabilities
