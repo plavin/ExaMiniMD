@@ -45,7 +45,14 @@
 #include "mpi.h"
 #endif
 
+#ifdef USE_CALIPER
+#include <caliper/cali.h>
+#endif
+
 int main(int argc, char* argv[]) {
+#ifdef USE_CALIPER
+   CALI_CXX_MARK_FUNCTION;
+#endif
 
    #ifdef EXAMINIMD_ENABLE_MPI
    MPI_Init(&argc,&argv);
@@ -53,10 +60,22 @@ int main(int argc, char* argv[]) {
 
    Kokkos::initialize(argc,argv);
 
+#ifdef USE_CALIPER
+   CALI_MARK_BEGIN("ExaMiniMD Init");
+#endif
    ExaMiniMD examinimd;
    examinimd.init(argc,argv);
-  
+#ifdef USE_CALIPER
+   CALI_MARK_END("ExaMiniMD Init");
+#endif
+
+#ifdef USE_CALIPER
+   CALI_MARK_BEGIN("ExaMiniMD Run");
+#endif
    examinimd.run(examinimd.input->nsteps);
+#ifdef USE_CALIPER
+   CALI_MARK_END("ExaMiniMD Run");
+#endif
 
    //   examinimd.check_correctness();
 

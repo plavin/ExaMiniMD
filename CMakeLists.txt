@@ -6,6 +6,7 @@ include(GNUInstallDirs)
 
 find_package(Kokkos 3.0 REQUIRED)
 option(USE_MPI "Build with MPI" ON)
+option(USE_CALIPER "Enable Caliper" FALSE)
 
 if (USE_MPI)
   find_package(MPI REQUIRED CXX)
@@ -18,6 +19,11 @@ else()
       message(FATAL_ERROR "Kokkos uses CUDA but compiler is not nvcc")
     endif()
   endif()
+endif()
+
+if (USE_CALIPER)
+  find_package(caliper REQUIRED)
+  add_compile_definitions(USE_CALIPER)
 endif()
 
 # force target_source to resolve relative paths immediately
