@@ -461,12 +461,12 @@ void Input::create_lattice(Comm* comm) {
 
   System s = *system;
 
-  t_x::HostMirror h_x = Kokkos::create_mirror_view(s.x);
-  t_v::HostMirror h_v = Kokkos::create_mirror_view(s.v);
-  t_q::HostMirror h_q = Kokkos::create_mirror_view(s.q);
-  t_mass::HostMirror h_mass = Kokkos::create_mirror_view(s.mass);
-  t_type::HostMirror h_type = Kokkos::create_mirror_view(s.type);
-  t_id::HostMirror h_id = Kokkos::create_mirror_view(s.id);
+  t_x::host_mirror_type h_x = Kokkos::create_mirror_view(s.x);
+  t_v::host_mirror_type h_v = Kokkos::create_mirror_view(s.v);
+  t_q::host_mirror_type h_q = Kokkos::create_mirror_view(s.q);
+  t_mass::host_mirror_type h_mass = Kokkos::create_mirror_view(s.mass);
+  t_type::host_mirror_type h_type = Kokkos::create_mirror_view(s.type);
+  t_id::host_mirror_type h_id = Kokkos::create_mirror_view(s.id);
 
   Kokkos::deep_copy(h_mass,s.mass);
 

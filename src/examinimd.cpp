@@ -313,12 +313,12 @@ void ExaMiniMD::dump_binary(int step) {
   }
 
   System s = *system;
-  t_id::HostMirror h_id = Kokkos::create_mirror_view(s.id);
-  t_type::HostMirror h_type = Kokkos::create_mirror_view(s.type);
-  t_q::HostMirror h_q = Kokkos::create_mirror_view(s.q);
-  t_x::HostMirror h_x = Kokkos::create_mirror_view(s.x);
-  t_v::HostMirror h_v = Kokkos::create_mirror_view(s.v);
-  t_f::HostMirror h_f = Kokkos::create_mirror_view(s.f);
+  t_id::host_mirror_type h_id = Kokkos::create_mirror_view(s.id);
+  t_type::host_mirror_type h_type = Kokkos::create_mirror_view(s.type);
+  t_q::host_mirror_type h_q = Kokkos::create_mirror_view(s.q);
+  t_x::host_mirror_type h_x = Kokkos::create_mirror_view(s.x);
+  t_v::host_mirror_type h_v = Kokkos::create_mirror_view(s.v);
+  t_f::host_mirror_type h_f = Kokkos::create_mirror_view(s.f);
   Kokkos::deep_copy(h_id,s.id);
   Kokkos::deep_copy(h_type,s.type);
   Kokkos::deep_copy(h_q,s.q);

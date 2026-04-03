@@ -74,12 +74,12 @@
 #include <neighbor.h>
 #ifndef NEIGHBOR_CSR_H
 #define NEIGHBOR_CSR_H
-#include <Kokkos_StaticCrsGraph.hpp>
+#include <KokkosSparse_StaticCrsGraph.hpp>
 #include <system.h>
 #include <binning.h>
 
 template<class MemorySpace>
-struct NeighListCSR : public Kokkos::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT> {
+struct NeighListCSR : public KokkosSparse::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT> {
   struct NeighViewCSR {
     private:
       const T_INT* const ptr;
@@ -100,14 +100,14 @@ struct NeighListCSR : public Kokkos::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,Mem
   typedef NeighViewCSR t_neighs;
 
   NeighListCSR() :
-    Kokkos::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT>() {}
+    KokkosSparse::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT>() {}
   NeighListCSR (const NeighListCSR& rhs) :
-    Kokkos::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT>(rhs) {
+    KokkosSparse::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT>(rhs) {
   }
 
   template<class EntriesType, class RowMapType>
   NeighListCSR (const EntriesType& entries_,const RowMapType& row_map_) :
-    Kokkos::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT>( entries_, row_map_) {}
+    KokkosSparse::StaticCrsGraph<T_INT,Kokkos::LayoutLeft,MemorySpace,void,T_INT>( entries_, row_map_) {}
 
 
   KOKKOS_INLINE_FUNCTION

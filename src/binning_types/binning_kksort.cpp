@@ -38,7 +38,11 @@
 
 #include<binning_kksort.h>
 
-BinningKKSort::BinningKKSort(System* s): Binning(s) {}
+//BinningKKSort::BinningKKSort(System* s): Binning(s) {}
+BinningKKSort::BinningKKSort(System* s)
+	: Binning(s)
+	, sorter(std::nullopt)
+{}
 
 namespace {
   //This needs to be multi dimensional Range Policy later
@@ -108,12 +112,12 @@ void BinningKKSort::create_binning(T_X_FLOAT dx_in, T_X_FLOAT dy_in, T_X_FLOAT d
 
     sorter = t_sorter(x,binop);
 
-    sorter.create_permute_vector();
+    sorter->create_permute_vector();
 
-    permute_vector = sorter.get_permute_vector();
+    permute_vector = sorter->get_permute_vector();
 
-    typename t_sorter::bin_count_type bin_count_1d = sorter.get_bin_count();
-    typename t_sorter::offset_type bin_offsets_1d = sorter.get_bin_offsets();
+    typename t_sorter::bin_count_type bin_count_1d = sorter->get_bin_count();
+    typename t_sorter::offset_type bin_offsets_1d = sorter->get_bin_offsets();
 
     bincount = t_bincount("Binning::bincount",nbinx,nbiny,nbinz);
     binoffsets = t_binoffsets("Binning::binoffsets",nbinx,nbiny,nbinz);
@@ -124,17 +128,17 @@ void BinningKKSort::create_binning(T_X_FLOAT dx_in, T_X_FLOAT dy_in, T_X_FLOAT d
                                                                           bincount,binoffsets,
                                                                           nbinx,nbiny,nbinz));
     if(sort) {
-      sorter.sort(x);
+      sorter->sort(x);
       auto v = Kokkos::subview(system->v,range,Kokkos::ALL);
-      sorter.sort(v);
+      sorter->sort(v);
       auto f = Kokkos::subview(system->f,range,Kokkos::ALL);
-      sorter.sort(f);
+      sorter->sort(f);
       t_type type(system->type,range);
-      sorter.sort(type);
+      sorter->sort(type);
       t_id id(system->id,range);
-      sorter.sort(id);
+      sorter->sort(id);
       t_q q(system->q,range);
-      sorter.sort(q);
+      sorter->sort(q);
     }
   }
 }

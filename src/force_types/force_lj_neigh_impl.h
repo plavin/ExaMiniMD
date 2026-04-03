@@ -73,9 +73,9 @@ void ForceLJNeigh<NeighborClass>::init_coeff(int nargs, char** args) {
       }
     }
   } else {
-    t_fparams::HostMirror h_lj1 = Kokkos::create_mirror_view(lj1);
-    t_fparams::HostMirror h_lj2 = Kokkos::create_mirror_view(lj2);
-    t_fparams::HostMirror h_cutsq = Kokkos::create_mirror_view(cutsq);
+    t_fparams::host_mirror_type h_lj1 = Kokkos::create_mirror_view(lj1);
+    t_fparams::host_mirror_type h_lj2 = Kokkos::create_mirror_view(lj2);
+    t_fparams::host_mirror_type h_cutsq = Kokkos::create_mirror_view(cutsq);
     Kokkos::deep_copy(h_lj1,lj1);
     Kokkos::deep_copy(h_lj2,lj2);
     Kokkos::deep_copy(h_cutsq,cutsq);

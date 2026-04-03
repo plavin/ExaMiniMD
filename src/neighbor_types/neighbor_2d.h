@@ -138,7 +138,7 @@ protected:
   typename Binning::t_permute_vector permute_vector;
 
   Kokkos::View<T_INT, MemorySpace> resize,new_maxneighs;
-  typename Kokkos::View<T_INT, MemorySpace>::HostMirror h_resize,h_new_maxneighs;
+  typename Kokkos::View<T_INT, MemorySpace>::host_mirror_type h_resize,h_new_maxneighs;
 
 
 public:

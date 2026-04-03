@@ -44,7 +44,8 @@
 class BinningKKSort: public Binning {
   typedef Kokkos::BinOp3D<t_x_const> t_binop;
   typedef Kokkos::BinSort<t_x_const,t_binop,Kokkos::DefaultExecutionSpace,T_INT> t_sorter;
-  t_sorter sorter;
+  std::optional<t_sorter> sorter;
+  //t_sorter sorter;
 
 public:
   BinningKKSort(System* s);

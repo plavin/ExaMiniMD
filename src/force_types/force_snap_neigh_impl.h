@@ -83,15 +83,15 @@ ForceSNAP<NeighborClass>::ForceSNAP(char** args, System* system_, bool half_neig
   concurrent_interactions =
 #if defined(KOKKOS_ENABLE_CUDA)
       std::is_same<Kokkos::DefaultExecutionSpace,Kokkos::Cuda>::value ?
-          Kokkos::DefaultExecutionSpace::concurrency()/vector_length :
+          Kokkos::DefaultExecutionSpace().concurrency()/vector_length :
 #elif defined(KOKKOS_ENABLE_HIP)
       std::is_same<Kokkos::DefaultExecutionSpace,Kokkos::Experimental::HIP>::value ?
-          Kokkos::DefaultExecutionSpace::concurrency()/vector_length :
+          Kokkos::DefaultExecutionSpace().concurrency()/vector_length :
 #elif defined(KOKKOS_ENABLE_SYCL)
       std::is_same<Kokkos::DefaultExecutionSpace,Kokkos::Experimental::SYCL>::value ?
-          Kokkos::DefaultExecutionSpace::concurrency()/vector_length :
+          Kokkos::DefaultExecutionSpace().concurrency()/vector_length :
 #else
-          Kokkos::DefaultExecutionSpace::concurrency();
+          Kokkos::DefaultExecutionSpace().concurrency();
 #endif
 
   schedule_user = 0;
